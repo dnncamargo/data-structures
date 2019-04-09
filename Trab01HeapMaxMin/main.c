@@ -19,7 +19,9 @@ int main(){
     insertnode(fp, node3);
     insertnode(fp, node4);
     insertnode(fp, node5);
-    
+
+    extractmax(fp);
+
     return 0;
 
 }

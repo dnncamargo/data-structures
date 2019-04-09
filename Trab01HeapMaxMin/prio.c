@@ -66,19 +66,16 @@ void insertnode(Fprio* fp, Node* item) {
  *   @returns Node*
  */
 Node* extractmax(Fprio* fp) {
-	int i, max = 0;
-    // Percorre o vetor por todos os elementos existentes
-	for (i = 1; i < fp-> n; i++){
-        // Condicao para descobrir elemento com maior prioridade e armazenar indice em max
-		if (fp-> vdata[max]-> priority < fp-> vdata[i]-> priority)
-			max = i;
-	}
-
-    // Realizar troca de Nodes por ponteiro (n-1 para que nao acesse a posicao vdata[-1])
-	swap ((fp-> vdata[max]), (fp-> vdata[fp-> n-1]));
-
-	fp-> n--;
-	return fp-> vdata[fp-> n];
+    printf("=============EXTRACING  NODE=============\n");
+    printf("NODE[%d] VALUE %2.2f :: NODE[%d] PRIORITY %d\n", 0, fp-> vdata[0]->value, 0, fp-> vdata[0]-> priority);
+    // vdata[0] sempre contem o node de maior prioridade
+	Node* max = fp-> vdata[0];
+    // Troca ponteiros entre os nodes de maior prioridade e o ultimo node inserido
+	swap ((fp-> vdata[0]), (fp-> vdata[fp-> n-1]));
+    fp-> n--;
+    showdata(fp);
+    rearrangedown(fp, 0);
+	return max;
 }
 
 /*
@@ -90,16 +87,49 @@ Node* extractmax(Fprio* fp) {
  *   @param index Indice do elemento no vetor
  *   @returns Node*
  */
-void rearrangeup(Fprio* fp, int index) {
-    // Condicao para verificar se o node pai tem prioridade menor que o node filho
-    if(index > 0 && fp-> vdata[parentnode(index)]-> priority < fp-> vdata[index]-> priority) {
-        swap ((fp-> vdata[parentnode(index)]), (fp-> vdata[fp-> n-1]));
-        rearrangeup(fp, parentnode(index));
+void rearrangeup(Fprio* fp, int childindex) {
+    // Condicao para verificar se o node pai tem prioridade menor que o node informado
+    if(childindex > 0 &&
+        fp-> vdata[parentnode(childindex)]-> priority < fp-> vdata[childindex]-> priority) {
+        swap ((fp-> vdata[parentnode(childindex)]), (fp-> vdata[childindex]));
+        rearrangeup(fp, parentnode(childindex));
+    }
+}
+
+/*
+ * Function: rearrangedown(Fprio*, int)
+ * -----------------------------------
+ *   Funcao para reorganizar Nodes por prioridade no heap
+ *
+ *   @param fp Ponteiro para a estrutura principal
+ *   @param index Indice do elemento no vetor
+ *   @returns Node*
+ */
+void rearrangedown(Fprio* fp, int parentindex) {
+
+    // maxchild e o index do filho com maior prioridade
+    int maxchild = leftchild(parentindex);
+    if(fp-> vdata[leftchild(parentindex)]-> priority < fp-> vdata[rightchild(parentindex)]-> priority) {
+        maxchild = rightchild(parentindex);
+    }
+
+    // Verifica se o node pai tem prioridade menor que o node filho
+    if(fp-> vdata[parentindex]-> priority < fp-> vdata[maxchild]-> priority) {
+        swap(fp-> vdata[parentindex], fp-> vdata[maxchild]);
+        rearrangedown(fp, maxchild);
     }
 }
 
 int parentnode(int i) {
     return ((i-1)/2);
+}
+
+int leftchild(int i) {
+    return 2*i+1;
+}
+
+int rightchild(int i) {
+    return 2*i+2;
 }
 
 /*
