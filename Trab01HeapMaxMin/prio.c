@@ -57,6 +57,30 @@ void insertnode(Fprio* fp, Node* item) {
 }
 
 /*
+ * Function: Node* extractmax(Fprio*)
+ * -----------------------------------
+ *   Funcao para extrair Node de maior prioridade da lista e retornar seu ponteiro
+ *
+ *   @param fp Ponteiro para a estrutura principal
+ *   @returns Node*
+ */
+Node* extractmax(Fprio* fp) {
+	int i, max = 0;
+    // Percorre o vetor por todos os elementos existentes
+	for (i = 1; i < fp-> n; i++){
+        // Condicao para descobrir elemento com maior prioridade e armazenar indice em max
+		if (fp-> vdata[max]-> priority < fp-> vdata[i]-> priority)
+			max = i;
+	}
+
+    // Realizar troca de Nodes por ponteiro (n-1 para que nao acesse a posicao vdata[-1])
+	swap ((fp-> vdata[max]), (fp-> vdata[fp-> n-1]));
+
+	fp-> n--;
+	return fp-> vdata[fp-> n];
+}
+
+/*
  * Function: rearrangeup(Fprio*, int)
  * -----------------------------------
  *   Funcao para reorganizar Nodes por prioridade no heap
@@ -71,7 +95,6 @@ void rearrangeup(Fprio* fp, int index) {
         swap ((fp-> vdata[parentnode(index)]), (fp-> vdata[index]));
         rearrangeup(fp, parentnode(index));
     }
-
 }
 
 int parentnode(int i) {
