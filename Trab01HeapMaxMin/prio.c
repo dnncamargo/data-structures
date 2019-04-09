@@ -38,6 +38,55 @@ Node* createnode(float val, int prio) {
     return n;
 }
 
+
+/*
+ * Function: insert(Fprio*, Node)
+ * -----------------------------------
+ *   Funcao para inserir elemento
+ *
+ *   @param fp Ponteiro para a estrutura principal
+ *   @param item Elemento a ser inserido
+ *   @returns void
+ */
+void insertnode(Fprio* fp, Node* item) {
+    printf("=============INSERTING  NODE=============\n");
+    printf("NODE[%d] VALUE %2.2f :: NODE[%d] PRIORITY %d\n", fp-> n, item->value, fp-> n, item-> priority);
+    fp-> vdata[fp-> n] = item;
+    fp-> n++;
+    rearrangeup(fp, fp-> n-1);
+    showdata(fp);
+}
+
+/*
+ * Function: rearrangeup(Fprio*, int)
+ * -----------------------------------
+ *   Funcao para reorganizar Nodes por prioridade no heap
+ *
+ *   @param fp Ponteiro para a estrutura principal
+ *   @param index Indice do elemento no vetor
+ *   @returns Node*
+ */
+void rearrangeup(Fprio* fp, int index) {
+    // Condicao para verificar se o node pai tem prioridade menor que o node filho
+    if(index > 0 && fp-> vdata[parentnode(index)]-> priority < fp-> vdata[index]-> priority) {
+        swap ((fp-> vdata[parentnode(index)]), (fp-> vdata[fp-> n-1]));
+        rearrangeup(fp, parentnode(index));
+    }
+
+}
+
+int parentnode(int i) {
+    return ((i-1)/2);
+}
+
+/*
+ * Function: swap(Node*, Node*)
+ * -----------------------------------
+ *   Funcao para realizar troca entre dois ponteiros do tipo Node
+ *
+ *   @param na, nb Ponteiros para Nodes
+ *   @returns void
+ */
 void swap(Node* na, Node* nb) {
 
     printf("============SWAPPINGING NODES============\n");
