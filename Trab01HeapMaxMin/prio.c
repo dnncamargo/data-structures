@@ -52,8 +52,7 @@ void insertnode(Fprio* fp, Node* item) {
     printf("=============INSERTING  NODE=============\n");
     printf("NODE[%d] VALUE %2.2f :: NODE[%d] PRIORITY %d\n", fp-> n, item->value, fp-> n, item-> priority);
     fp-> vdata[fp-> n] = item;
-    fp-> n++;
-    rearrangeup(fp, fp-> n-1);
+    rearrangeup(fp, fp-> n++);
     showdata(fp);
 }
 
@@ -69,7 +68,7 @@ void insertnode(Fprio* fp, Node* item) {
 void rearrangeup(Fprio* fp, int index) {
     // Condicao para verificar se o node pai tem prioridade menor que o node filho
     if(index > 0 && fp-> vdata[parentnode(index)]-> priority < fp-> vdata[index]-> priority) {
-        swap ((fp-> vdata[parentnode(index)]), (fp-> vdata[fp-> n-1]));
+        swap ((fp-> vdata[parentnode(index)]), (fp-> vdata[index]));
         rearrangeup(fp, parentnode(index));
     }
 
