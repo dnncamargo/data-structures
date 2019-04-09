@@ -13,6 +13,13 @@ int main(){
     Node* node4 = createnode(1.4, 4);
     Node* node5 = createnode(2.0, 2);
 
+    insertnode(fp, node0);
+    insertnode(fp, node1);
+    insertnode(fp, node2);
+    insertnode(fp, node3);
+    insertnode(fp, node4);
+    insertnode(fp, node5);
+    
     return 0;
 
 }
