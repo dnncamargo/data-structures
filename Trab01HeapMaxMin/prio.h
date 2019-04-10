@@ -26,7 +26,13 @@ void insertnode(Fprio*, Node*);
 
 void rearrangeup(Fprio*, int);
 
+void rearrangedown(Fprio*, int);
+
 int parentnode(int);
+
+int leftchild(int);
+
+int rightchild(int);
 
 Node* extractmax(Fprio*);
 
