@@ -16,7 +16,7 @@ Fprio* create(int length) {
     Fprio* fp = malloc (sizeof(Fprio));
 
     // criar os nodos do vetor
-    fp-> vdata = malloc (sizeof(Node) * length);
+    fp-> vdata = malloc (sizeof(Node));
     fp-> n = 0;
     fp-> len = length;
     return fp;
