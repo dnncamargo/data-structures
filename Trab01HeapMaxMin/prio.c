@@ -77,6 +77,27 @@ Node* extractmax(Fprio* fp) {
 }
 
 /*
+ * Function: changeprio(Fprio*, int, int)
+ * -----------------------------------
+ *   Funcao para alterar a prioridade de um Node
+ *
+ *   @param fp Ponteiro para a estrutura principal
+ *   @param index Indice do elemento no vetor
+ *   @param priority Valor da nova prioridade do Node
+ *   @returns Node*
+ */
+void changeprio(Fprio* fp, int index, int priority) {
+    int oldprio = fp-> vdata[index]-> priority;
+    fp-> vdata[index]-> priority = priority;
+    if(oldprio < fp-> vdata[index]-> priority) {
+        rearrangeup(fp, index);
+    } else {
+        rearrangedown(fp, index);
+    }
+}
+
+
+/*
  * Function: rearrangeup(Fprio*, int)
  * -----------------------------------
  *   Funcao para reorganizar Nodes por prioridade no heap
