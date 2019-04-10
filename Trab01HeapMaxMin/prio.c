@@ -16,7 +16,7 @@ Fprio* create(int length) {
     Fprio* fp = malloc (sizeof(Fprio));
 
     // criar os nodos do vetor
-    fp-> vdata = malloc (sizeof(Node) * length);
+    fp-> vdata = malloc (sizeof(Node));
     fp-> n = 0;
     fp-> len = length;
     return fp;
@@ -75,6 +75,27 @@ Node* extractmax(Fprio* fp) {
     rearrangedown(fp, 0);
 	return max;
 }
+
+/*
+ * Function: changeprio(Fprio*, int, int)
+ * -----------------------------------
+ *   Funcao para alterar a prioridade de um Node
+ *
+ *   @param fp Ponteiro para a estrutura principal
+ *   @param index Indice do elemento no vetor
+ *   @param priority Valor da nova prioridade do Node
+ *   @returns Node*
+ */
+void changeprio(Fprio* fp, int index, int priority) {
+    int oldprio = fp-> vdata[index]-> priority;
+    fp-> vdata[index]-> priority = priority;
+    if(oldprio < fp-> vdata[index]-> priority) {
+        rearrangeup(fp, index);
+    } else {
+        rearrangedown(fp, index);
+    }
+}
+
 
 /*
  * Function: rearrangeup(Fprio*, int)

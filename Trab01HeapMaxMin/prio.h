@@ -24,6 +24,8 @@ Node* createnode(float, int);
 
 void insertnode(Fprio*, Node*);
 
+void changeprio(Fprio*, int, int);
+
 void rearrangeup(Fprio*, int);
 
 void rearrangedown(Fprio*, int);
