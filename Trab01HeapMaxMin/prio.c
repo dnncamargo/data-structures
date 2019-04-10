@@ -54,7 +54,6 @@ void insertnode(Fprio* fp, Node* item) {
     fp-> vdata[fp-> n] = item;
     fp-> n++;
     rearrangeup(fp, fp-> n-1);
-    showdata(fp);
 }
 
 /*
@@ -73,7 +72,6 @@ Node* extractmax(Fprio* fp) {
     // Troca ponteiros entre os nodes de maior prioridade e o ultimo node inserido
 	swap ((fp-> vdata[0]), (fp-> vdata[fp-> n-1]));
     fp-> n--;
-    showdata(fp);
     rearrangedown(fp, 0);
 	return max;
 }
@@ -108,16 +106,21 @@ void rearrangeup(Fprio* fp, int childindex) {
 void rearrangedown(Fprio* fp, int parentindex) {
 
     // maxchild e o index do filho com maior prioridade
-    int maxchild = leftchild(parentindex);
-    if(fp-> vdata[leftchild(parentindex)]-> priority < fp-> vdata[rightchild(parentindex)]-> priority) {
-        maxchild = rightchild(parentindex);
+    if(leftchild(parentindex) < fp-> n) {
+        int maxchild = leftchild(parentindex);
+        // a segunda condicao assegura qual dos filhos tem prioridade maior
+        if(rightchild(parentindex) < fp-> n &&
+            fp-> vdata[leftchild(parentindex)]-> priority < fp-> vdata[rightchild(parentindex)]-> priority) {
+            maxchild = rightchild(parentindex);
+        }
+
+        // Verifica se o node pai tem prioridade menor que o node filho
+        if(fp-> vdata[parentindex]-> priority < fp-> vdata[maxchild]-> priority) {
+            swap(fp-> vdata[parentindex], fp-> vdata[maxchild]);
+            rearrangedown(fp, maxchild);
+        }
     }
 
-    // Verifica se o node pai tem prioridade menor que o node filho
-    if(fp-> vdata[parentindex]-> priority < fp-> vdata[maxchild]-> priority) {
-        swap(fp-> vdata[parentindex], fp-> vdata[maxchild]);
-        rearrangedown(fp, maxchild);
-    }
 }
 
 int parentnode(int i) {

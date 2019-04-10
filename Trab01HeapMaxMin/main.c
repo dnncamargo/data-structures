@@ -12,6 +12,7 @@ int main(){
     Node* node3 = createnode(1.9, 9);
     Node* node4 = createnode(1.4, 4);
     Node* node5 = createnode(2.0, 2);
+    Node* node6 = createnode(1.1, 7);
 
     insertnode(fp, node0);
     insertnode(fp, node1);
@@ -19,8 +20,13 @@ int main(){
     insertnode(fp, node3);
     insertnode(fp, node4);
     insertnode(fp, node5);
+    insertnode(fp, node6);
 
     extractmax(fp);
+    extractmax(fp);
+    extractmax(fp);
+
+    showdata(fp);
 
     return 0;
 
