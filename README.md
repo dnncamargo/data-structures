@@ -36,3 +36,8 @@ Propriedades:
     •	Inferior às chaves de seus descendentes quando i é situado em um nível mínimo.
 
 Implemente as versões do heap-max-min e heap-min-max na linguagem C, organizando o código em um tipo abstrato de dados(TAD). Estes TAD deverão fornecer no mínimo as 4 operações descritas acima.
+
+
+Para baixar o repositório. use:
+cd pasta/para/clonar/
+git clone https://github.com/danncam/data-structures
