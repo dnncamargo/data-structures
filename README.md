@@ -41,3 +41,8 @@ Implemente as versões do heap-max-min e heap-min-max na linguagem C, organizand
 Para baixar o repositório. use:
 cd pasta/para/clonar/
 git clone https://github.com/danncam/data-structures
+
+Depois de fazer as modificações. use
+git add <arquivos modificados>
+git commit -m "mensagem"
+git push
