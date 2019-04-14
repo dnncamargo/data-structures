@@ -22,9 +22,9 @@ int main(){
     insertnode(fp, node5);
     insertnode(fp, node6);
 
-    //extractmax(fp);
-    //extractmax(fp);
-    //extractmax(fp);
+    extractmax(fp);
+    extractmax(fp);
+    extractmax(fp);
 
     showdata(fp);
 
