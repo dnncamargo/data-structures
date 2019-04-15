@@ -28,7 +28,7 @@ int main(){
 
     showdata(fp);
 
-    changeprio(fp, 1, 0);
+    chanprio(fp, 1, 0);
 
     showdata(fp);
 

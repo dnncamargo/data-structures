@@ -87,6 +87,8 @@ Node* extractmax(Fprio* fp) {
  *   @returns Node*
  */
 void changeprio(Fprio* fp, int index, int priority) {
+    printf("============CHANGING PRIOTITY============\n");
+    printf("NODE[%d] VALUE %2.2f :: NODE[%d] PRIORITY %d\n", index, fp-> vdata[index]->value, index, fp-> vdata[index]-> priority);
     int oldprio = fp-> vdata[index]-> priority;
     fp-> vdata[index]-> priority = priority;
     if(oldprio < fp-> vdata[index]-> priority) {
@@ -107,9 +109,9 @@ void changeprio(Fprio* fp, int index, int priority) {
  *   @returns Node*
  */
 void rearrangeup(Fprio* fp, int childindex) {
-    // Condicao para verificar se o node pai tem prioridade menor que o node informado
+    // Condicao para verificar se o node pai tem prioridade maior que o node informado
     if(childindex > 0 &&
-        fp-> vdata[parentnode(childindex)]-> priority < fp-> vdata[childindex]-> priority) {
+        fp-> vdata[parentnode(childindex)]-> priority > fp-> vdata[childindex]-> priority) {
         swap ((fp-> vdata[parentnode(childindex)]), (fp-> vdata[childindex]));
         rearrangeup(fp, parentnode(childindex));
     }
@@ -131,12 +133,12 @@ void rearrangedown(Fprio* fp, int parentindex) {
         int maxchild = leftchild(parentindex);
         // a segunda condicao assegura qual dos filhos tem prioridade maior
         if(rightchild(parentindex) < fp-> n &&
-            fp-> vdata[leftchild(parentindex)]-> priority < fp-> vdata[rightchild(parentindex)]-> priority) {
+            fp-> vdata[leftchild(parentindex)]-> priority > fp-> vdata[rightchild(parentindex)]-> priority) {
             maxchild = rightchild(parentindex);
         }
 
-        // Verifica se o node pai tem prioridade menor que o node filho
-        if(fp-> vdata[parentindex]-> priority < fp-> vdata[maxchild]-> priority) {
+        // Verifica se o node pai tem prioridade maior que o node filho
+        if(fp-> vdata[parentindex]-> priority > fp-> vdata[maxchild]-> priority) {
             swap(fp-> vdata[parentindex], fp-> vdata[maxchild]);
             rearrangedown(fp, maxchild);
         }
