@@ -21,7 +21,19 @@ bintree * insertnode (int info, bintree * t) {
 bintree* removenode (int info, bintree* t) {
     if(t != NULL) {
         if(info == t-> info) {
-            return 1;
+            // caso 1:
+            if(t-> left == NULL && t-> right == NULL)
+            {
+                
+                bintree* a;
+                a = t-> left-> info;
+                t-> left-> info = NULL;
+                return a;
+            }
+            //caso 2:
+            
+            //caso 3:
+            
         } else {
             if(info < t-> info) {
                 return removenode(info, t-> left);
