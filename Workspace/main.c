@@ -11,10 +11,11 @@ int main(){
     bt = insertnode(8, bt);
     bt = insertnode(12, bt);
     bt = insertnode(-10, bt);
-    if(search(-10, bt)){
+    if(search(-11, bt)){
         printf("Have\n");
+    } else {
+        printf("Do not have\n");
     }
-
-    printf("printing\n");
+    removenode(12, bt);
     printnodes(bt);
 }

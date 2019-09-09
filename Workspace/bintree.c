@@ -17,11 +17,51 @@ bintree * insertnode (int info, bintree * t) {
     }
     return t;
 }
-
 bintree* removenode (int info, bintree* t) {
+    if(t == NULL) {
+        return NULL;
+    } else {
+        if(t-> info > info) {
+            t-> left = removenode(info, t-> left);
+        } else {
+            if(t-> info < info) {
+                t-> right = removenode(info, t-> right);
+            } else {
+                if(t-> left == NULL && t-> right == NULL) {
+                    free(t);
+                    t==NULL;
+                } else {
+                    if(t-> left == NULL) {
+                        bintree* auxt = t;
+                        t = t-> right;
+                        free(auxt);
+                    } else {
+                        bintree* auxt = t;
+                        t = t-> left;
+                        free(auxt);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*bintree* removenode (int info, bintree* t) {
     if(t != NULL) {
         if(info == t-> info) {
-            return 1;
+            // caso 1:
+            if(t-> left == NULL && t-> right == NULL)
+            {
+
+                bintree* a;
+                a = t-> left-> info;
+                t-> left-> info = NULL;
+                return a;
+            }
+            //caso 2:
+
+            //caso 3:
+
         } else {
             if(info < t-> info) {
                 return removenode(info, t-> left);
@@ -33,7 +73,7 @@ bintree* removenode (int info, bintree* t) {
         return NULL;
     }
 }
-
+*/
 int search (int info, bintree * t) {
     if(t != NULL) {
         if(info == t-> info) {
