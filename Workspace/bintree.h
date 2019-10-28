@@ -7,7 +7,7 @@ typedef struct bt{
     struct bt * right;
 } bintree;
 
-int search (int, bintree*);
+int exists (int, bintree*);
 
 bintree* insertnode (int, bintree*);
 
