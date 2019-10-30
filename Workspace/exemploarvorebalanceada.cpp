@@ -19,16 +19,19 @@ void createNode (AvlNo * &root, int elem) {
 	root-> fatBal = 0;
 }
 
-void rotLLLR (AvlNo * a, bool &status) {
+void rotRRRL (AvlNo * a, bool &status) {
+	printf("rot RR");
 	avlNo *b, *c;
 	b = a-> left;
 	if (b-> fatBal == -1) { // rotacao simples
+		printf(" simple\n");
 		a-> left = b-> right;
 		b-> right = a;
 		a-> fatBal = 0;
 		a = b;
 	}
 	else { // rotacao dupla
+			printf(" double\n");
 			c = b-> right;
 			b-> right = c-> left;
 			c-> left = b;
@@ -47,7 +50,8 @@ void rotLLLR (AvlNo * a, bool &status) {
 		status = false;
 }
 
-void rotRRRL (AvlNo * a, bool &status) {
+void rotLLLR (AvlNo * a, bool &status) {
+		printf("rot LL\n");
 		AvlNo * b, * c;
 		b = a-> right;
 		if (b-> fatBal == 1) { // rotacao simples
@@ -84,20 +88,24 @@ void insertAvl (AvlNo * &root, int elem, bool &status) {
 			return;
 	} else if (elem < root-> info) {
 		insertAvl(root-> left, elem, status);
-		if (status)
+		if (status) {
 			switch (root-> fatBal) {
 				case 1 : root-> fatBal = 0; status = false; break;
 				case 0 : root-> fatBal = -1; break;
-				case -1 : rotRRRL(root, status); break;
-			}	
+				case -1 : rotLLLR(root, status); break;
+			}
+			printf("fatBal: %d\n", root-> fatBal);
+			}
 	} else {
 		insertAvl(root-> right, elem, status);
-		//if (status)
-			//switch (root-> fatBal) {
-				//case -1 : root-> fatBal = 0; status = false; break;
-				//case 0 : root-> fatBal = 1; break;
-				//case 1 : rotLLLR(root, status); break;
-			//}
+		if (status){
+			switch (root-> fatBal) {
+				case -1 : root-> fatBal = 0; status = false; break;
+				case 0 : root-> fatBal = 1; break;
+				case 1 : rotRRRL(root, status); break;
+			}
+			printf("fatBal: %d\n", root-> fatBal);
+		}
 	}
 }
 
@@ -106,7 +114,7 @@ void printAvl(AvlNo * root) {
 		printf("enter left\n");
         printAvl(root-> left);
 
-		printf("show\n");
+		printf("show info\n");
 		printf("%d\n", root-> info);
 
 		printf("enter right\n");
@@ -115,18 +123,28 @@ void printAvl(AvlNo * root) {
     }
 }
 
+
 int main(){
 	AvlNo * root = NULL;
 
-	insertAvl(root, 3, status);
-	insertAvl(root, 2, status);
-	insertAvl(root, 1, status);
-	//insertAvl(root, 18, status);
-	//insertAvl(root, 1, status);
-	//insertAvl(root, 10, status);
-	//removeAvl(root, 18);
-	printAvl(root);
+	int op;
+	while (true) {
+		scanf("%d", &op);
+		switch (op) {
+		case 1:
+			int value;
+			printf("insert node: ");
+			scanf("%d", &value);
+			insertAvl(root, value, status);
+			break;
+		case 2:
+			printAvl(root);
+			break;
+		default:
+			return 0;
+		}
 
+	}
 	return 0;
 }
 	
