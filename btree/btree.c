@@ -2,15 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-
-#define MAXLEN (3)
-
-typedef struct btree {
-    int nkeys;    /* número de chaves incluídas */
-    int keys[MAXLEN]; /* vetor de chaves (elementos) */
-    int isleaf;     /* se o nó atual é uma folha */
-    struct btree *btchildren[MAXLEN+1];  /* vetor de ponteiros para os nós filhos */
-} Btree;
+#include "btree.h"
 
 Btree * createbtree () {
 
@@ -91,7 +83,8 @@ Btree * insertinto(Btree * b, int key, int * median) {
 
         /* Todos se movem */
         printf("Todos se movem\n");
-        memmove(&b-> keys[pos+1], &b-> keys[pos], sizeof(*(b-> keys)) * (b-> nkeys - pos));
+        int newlen = sizeof(*(b-> keys)) * (b-> nkeys - pos);
+        memmove(&b-> keys[pos+1], &b-> keys[pos], newlen);
         b-> keys[pos] = key;
         b-> nkeys++;
 
@@ -187,12 +180,3 @@ void printbtree(Btree * b) {
     }
 }
 
-int main () {
-    Btree * b = createbtree();
-    insertbtree(b, 32);
-    insertbtree(b, 64);
-    insertbtree(b, 128);
-    insertbtree(b, 256);
-    printbtree(b);
-    return 0;
-}
