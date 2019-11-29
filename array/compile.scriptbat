@@ -1,0 +1,3 @@
+gcc -c arrays.c
+gcc -c main.c
+gcc -o main main.c arrays.c
